@@ -7,31 +7,100 @@
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
 var factorial = function(n) {
+  if(n === 0){
+   return 1;
+ }else if(n < -1) {
+   return null;
+  }
+  return n * factorial(n -1);
 };
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
+    if(array.length === 0) {
+      return 0;
+    }else {
+      return array[0] + sum(array.slice(1));
+    }
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+   if(array.length === 0) {
+     //this if statement is an empty array this is to let us know there is an array but its empty
+       return 0;
+       //returning 0 becuase there is empty array
+   }
+   if(Array.isArray(array[0])) {
+     //the if statement is to verify that all your elements are inside an array
+     //and starting from 0 meaning from the first element
+     return arraySum(array[0]) + arraySum(array.slice(1));
+     //from all your elements starting from 0 your going to to sum
+     //your elements by 1.
+   }
+ return array[0] + arraySum(array.slice(1));
+ //return array starting from the first element and add all your elements by 1.
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+ if(n === 0) {
+   //base case: this is the stopping point.
+   return true;
+   //return true since it is the stopping point
+ }
+  if(n === 1) {
+   //it would be false becasuse number 1 is an odd number
+   return false;
+   //this is false because its looking for your even numbers not odd numbers
+ }
+ else if(n < 0) {
+   //its asking if n is a negative number it would be less than 0.
+   return isEven(n * -1)
+   //your calling your function and multiply it as it is by a negative number for it would stay as a negative number.
+ }
+ return isEven(n -2);
+ //invoke your function but n -2 to subtract 2 from your elements.
+
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+
+ if(n === 0) {
+   // this is for we would know where its the starting point
+   return 0;
+   //return 0 since its thats your first element
+ }
+
+ n = n > 0 ? n - 1 : n + 1;
+ //saying the  n is greater than 0 if n take away from 1 or n plus 1 setting up and if statement
+
+ return n + sumBelow(n);
+// add n to the function name of the sum that would below and it would be n
 };
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+ var array =[];
+
+   if(x === y) {
+     return array;
+   }
+   if(x < y -1){
+     array.push(x + 1);
+  return array.concat(range(x + 1, y));
+   }
+   if(x > y +1) {
+     array.push(x -1);
+     return array.concat(range(x -1, y));
+   }
+return array;
 };
 
 // 7. Compute the exponent of a number.
@@ -40,6 +109,7 @@ var range = function(x, y) {
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  
 };
 
 // 8. Determine if a number is a power of two.
